@@ -1,7 +1,15 @@
 <?php
+
+use App\MySQLQueryBuilder;
+
 require('../vendor/autoload.php');
 
-
-# TODO: Creer un QueryBuilder
-# Ecrire une requête en chainant des methodes
-# Afficher la requête
+echo (new MySQLQueryBuilder())
+    ->select(["id", "name", "email"])
+    ->from("user")
+    ->orWhere("phone", "LIKE", "+33%")
+    ->where("email", "=", "jeandupont@mail.fr")
+    ->orWhere("name", "=", "Jean")
+    ->where("id", "=", "0")
+    ->orWhere("lastname", "=", "dupont")
+    ->build();
